@@ -69,7 +69,21 @@ var guardaryeditar = (e) => {
     },
   });
 };
-
+var cargaLavadoras = () => {
+  return new Promise((resolve, reject) => {
+    $.post("../../Controllers/lavadoras.controller.php?op=todos", (res) => {
+      res = JSON.parse(res);
+      var html = "";
+      $.each(res, (index, val) => {
+        html += `<option value="${val.lavadoraId}"> ${val.Nombre}</option>`;
+      });
+      $("#lavadoraId").html(html);
+      resolve();
+    }).fail((error) => {
+      reject(error);
+    });
+  });
+};
 
 var editar = async (lavadoraId) => {
   await cargaLavadoras();
@@ -78,15 +92,14 @@ var editar = async (lavadoraId) => {
     { lavadoraId: lavadoraId },
     (res) => {
       res = JSON.parse(res);
-
-      $("#lavadoraId").val(res.lavadoraId);
+      
       $("#lavadoraId").val(res.lavadoraId);
       $("#modelo").val(res.modelo);
       $("#numserie").val(res.numserie);
       $("#tipolavadora").val(res.tipolavadora);
       $("#precio").val(res.precio);
       $("#fabrica").val(res.fabrica);
-      //document.getElementById("PaisId").value = res.lavadoraId;
+      //document.getElementById("lavadoraIdd").value = res.lavadoraId;
 
     }
   );

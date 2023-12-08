@@ -16,7 +16,7 @@ class Clase_Lavadoras
             $con->close();
         }
     }
-    public function editar($lavadoraId)
+    public function uno($lavadoraId)
     {
         try {
             $con = new Clase_Conectar_Base_Datos();
@@ -50,7 +50,7 @@ class Clase_Lavadoras
         try {
             $con = new Clase_Conectar_Base_Datos();
             $con = $con->ProcedimientoConectar();
-            $cadena = "UPDATE `lavadoras` SET `modelo`='$modelo', `numserie`='$numserie',`tipolavadora`='$tipolavadora', `precio`='$precio', `fabrica`='$fabrica' WHERE `lavadoraId`='$lavadoraId'";
+            $cadena = "UPDATE `lavadoras` SET `lavadoraId`='$lavadoraId',`modelo`='$modelo', `numserie`='$numserie',`tipolavadora`='$tipolavadora', `precio`=$precio, `fabrica`='$fabrica' WHERE `lavadoraId`='$lavadoraId'";
             $result = mysqli_query($con, $cadena);
             return "ok";
         } catch (Throwable $th) {
